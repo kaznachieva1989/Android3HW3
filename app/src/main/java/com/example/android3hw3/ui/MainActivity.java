@@ -52,18 +52,14 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.onIte
                 startActivityForResult(new Intent(MainActivity.this, AddPostActivity.class), 43);
             }
         });
-
-        initAdapter();
-
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
         postViewModel.allPosts.observe(this, posts -> {
+            postList.clear();
             postList = posts;
             postAdapter.setList(posts, (PostAdapter.onItemClickListener) this);
         });
+
+        initAdapter();
+
     }
 
     private void initAdapter() {
@@ -93,7 +89,9 @@ public class MainActivity extends AppCompatActivity implements PostAdapter.onIte
 
     @Override
     public void onClick(int id) {
-        startActivityForResult(new Intent(MainActivity.this, UpdateActivity.class).putExtra("id", id)
-                .putExtra("post", postList.get(id)), 44);
+        if (postList != null && postList.size() > 0) {
+            startActivityForResult(new Intent(MainActivity.this, UpdateActivity.class).putExtra("id", id)
+                    .putExtra("post", postList.get(id)), 44);
+        }
     }
 }
