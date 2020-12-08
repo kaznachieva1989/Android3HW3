@@ -13,6 +13,7 @@ import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface PostApi {
     @GET("posts/{postId}")
@@ -38,6 +39,9 @@ public interface PostApi {
             @Field("title") String title,
             @Field("content") String content,
             @Field("user") Integer user,
-            @Field("group") Integer group
-    );
+            @Field("group") Integer group);
+
+    @GET("posts")
+    Call<List<Post>> getUserPost(
+            @Query("user") Integer userId);
 }

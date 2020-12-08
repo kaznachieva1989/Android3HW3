@@ -1,6 +1,5 @@
 package com.example.android3hw3.data.adapter;
 
-import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,20 +14,19 @@ import com.example.android3hw3.models.Post;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
-
+public class UserPostAdapter extends RecyclerView.Adapter<UserPostAdapter.UserPostViewHolder> {
     List<Post> postList = new ArrayList<>();
     OnItemOpenActivity onItemClickListener;
 
     @NonNull
     @Override
-    public PostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public UserPostViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.posts_item, parent, false);
-        return new PostViewHolder(view);
+        return new UserPostViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull UserPostViewHolder holder, int position) {
         holder.onBind(postList.get(position), onItemClickListener);
     }
 
@@ -43,17 +41,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         notifyDataSetChanged();
     }
 
-    public void removePost(int id) {
-        postList.remove(id);
-        notifyDataSetChanged();
-    }
-
-    public static class PostViewHolder extends RecyclerView.ViewHolder {
+    public class UserPostViewHolder extends RecyclerView.ViewHolder {
         TextView titlePosts, contentPosts, userPosts, idPosts, groupPosts;
 
-        TextView post_all;
-
-        public PostViewHolder(@NonNull View itemView) {
+        public UserPostViewHolder(@NonNull View itemView) {
             super(itemView);
             titlePosts = itemView.findViewById(R.id.titlePosts);
             contentPosts = itemView.findViewById(R.id.contentPosts);
@@ -62,7 +53,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             groupPosts = itemView.findViewById(R.id.groupPosts);
         }
 
-        @SuppressLint("SetTextI18n")
         public void onBind(Post post, OnItemOpenActivity onItemClickListener) {
             titlePosts.setText(post.getTitle());
             idPosts.setText(post.getId().toString());
@@ -70,17 +60,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             userPosts.setText(String.valueOf(post.getUser().toString()));
             groupPosts.setText(String.valueOf(post.getGroup().toString()));
 
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onItemClickListener.onClick(getAdapterPosition());
+                }
+            });
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
                     onItemClickListener.onLongClick(getAdapterPosition());
                     return false;
-                }
-            });
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onItemClickListener.onClick(getAdapterPosition());
                 }
             });
         }

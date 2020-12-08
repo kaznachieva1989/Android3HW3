@@ -14,7 +14,7 @@ import com.example.android3hw3.models.Post;
 
 public class UpdateActivity extends AppCompatActivity {
 
-    UpViewModel upViewModel;
+    UpdateViewModel upViewModel;
     Post post;
     private EditText upTitle;
     private EditText upContent;
@@ -28,7 +28,7 @@ public class UpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
 
-        upViewModel = ViewModelProviders.of(this).get(UpViewModel.class);
+        upViewModel = ViewModelProviders.of(this).get(UpdateViewModel.class);
 
         initView();
 
@@ -39,7 +39,6 @@ public class UpdateActivity extends AppCompatActivity {
             upUser.setText(post.getUser().toString());
             upGroup.setText(post.getGroup().toString());
             upContent.setText(post.getContent());
-
         }
 
         upPost.setOnClickListener(new View.OnClickListener() {
@@ -61,9 +60,7 @@ public class UpdateActivity extends AppCompatActivity {
                 finish();
             }
         });
-
     }
-
     private void initView() {
         upTitle = findViewById(R.id.up_title);
         upContent = findViewById(R.id.up_content);

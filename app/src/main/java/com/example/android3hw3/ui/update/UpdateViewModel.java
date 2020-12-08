@@ -11,7 +11,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class UpViewModel extends ViewModel {
+public class UpdateViewModel extends ViewModel {
 
     public void updatePosts(int id, String title, String content, Integer group, Integer user) {
         PostService.getInstance().updatePost(id, title, content, user, group).enqueue(new Callback<Post>() {

@@ -13,7 +13,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Android3HW3">
-        <activity android:name=".ui.update.UpdateActivity"></activity>
+        <activity android:name=".ui.users.userPost.UserPostActivity"></activity>
+        <activity android:name=".ui.users.UsersActivity" />
+        <activity android:name=".ui.update.UpdateActivity" />
         <activity android:name=".ui.addPost.AddPostActivity" />
         <activity android:name=".ui.MainActivity">
             <intent-filter>
